@@ -30,12 +30,23 @@ col1, spacer,  col2 = st.columns([2, 6, 1])
 
 with col1:
     if st.button("Translate"):
-        language_code = get_language_code(select)
-        translated_text = Translate(language_code, word)
-        st.write(f"{translated_text}")
+        if word:
+            language_code = get_language_code(select)
+            if language_code:
+                translated_text = Translate(language_code, word)
+                if translated_text:
+                    st.write(f"{translated_text}")
+        else:
+            st.warning("Please enter a word to translate")
 
 with col2:
     if st.button("Voice"):
-        language_code = get_language_code(select)
-        translated_text = Translate(language_code, word)
-        Voice(translated_text)
+        if word:
+            language_code = get_language_code(select)
+            if language_code:
+                translated_text = Translate(language_code, word)
+                if translated_text:
+                    Voice(translated_text, lang=language_code)
+        else:
+            st.warning("please enter a word to translate.")
+
